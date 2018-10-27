@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>task 4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+
+    class Node {
+      constructor(val, left = null, right = null) {
+        this.val = val;
+        this.left = left,
+        this.right = right
+      }
+    }
+
+    // testing data
+    const C = new Node('C');
+    const D = new Node('D');
+    const B = new Node('B', C, D);
+    const G = new Node('G');
+    const H = new Node('H');
+    const F = new Node('F', G, H);
+    const E = new Node('E', F, null);
+    const A = new Node('A', B, E);
+    
+
+    function printTree(element) {
+
+      if (element.left) {
+        printTree(element.left);
+      } 
+
+      console.log(element.val);
+
+      if (element.right) {
+        printTree(element.right);
+      } 
+    }
+
+    printTree(A);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
