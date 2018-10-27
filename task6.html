@@ -7,30 +7,28 @@
   <title>task 6</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
-    const symbolsOpen = ['{', '[', '('];
-    const symbolsClose = ['}', ']', ')'];
+    const symbolsOpen = {'{': true, '[': true, '(': true};
+    const symbolsClose = {'}': '{', ']': '[', ')': '('};
 
-
-    const test = '({[abc]ef}1(2)';
-
+    const test = '({[abc]ef}1(2))';
 
     function validator(text) {
-      let stack = [];
+      const stack = [];
       for (let i = 0; i < text.length; i++) {
         const element = text[i];
 
-        if (symbolsOpen.includes(element)) {
-          stack.push(symbolsClose[symbolsOpen.indexOf(element)]);
+        if (symbolsOpen[element]) {
+          stack.push(element);
           continue;
         }
 
-        if (symbolsClose.includes(element)) {
-          if (stack[stack.length - 1] === element) {
-            stack.pop();
-          } else {
-            return false;
-          }
+        if (symbolsClose[element] && stack.pop() !== symbolsClose[element]) {
+          return false;
         }
+      }
+      
+      if (stack.length) {
+        return false
       }
 
       return true;
